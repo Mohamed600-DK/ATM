@@ -1,0 +1,20 @@
+
+
+
+
+
+{'base_window': <tkinter.Tk object .>, 'masg': <tkinter.Toplevel object .!toplevel>}
+
+
+
+
+
+
+
+
+
+{'log_in_frame': <tkinter.Frame object .!frame>, 'option_choise': <tkinter.Frame object .!frame2>, 'f_Cash_Withdraw': <tkinter.Frame object .!frame3>, 'f_Balance_Inquiry': <tkinter.Frame object .!frame4>, 'f_Password_Change': <tkinter.Frame object .!frame5>, 'f_Fawry_Service': <tkinter.Frame object .!frame6>, 'Error_label': <tkinter.Label object .!label>, 'accountNumber_textbox': <tkinter.Entry object .!entry>, 'login_button': <tkinter.Button object .!button>, 'Ok': <tkinter.Button object .!button2>, 'b_Cash_Withdraw': <tkinter.Button object .!button3>, 'back': <tkinter.Button object .!frame6.!button>, 'b_Balance_Inquiry': <tkinter.Button object .!button4>, 'b_Password_Change': <tkinter.Button object .!button5>, 'b_Fawry_Service': <tkinter.Button object .!button6>}
+
+
+
+

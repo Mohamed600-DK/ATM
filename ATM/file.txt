@@ -1,0 +1,18 @@
+{
+    "clints_data":
+    [
+        {
+            "ID":"123",
+            "password":"456"
+        },
+        {
+            "ID":"456",
+            "password":"456"
+        }
+
+
+    ],
+
+
+    "locked_accounts":[]
+}

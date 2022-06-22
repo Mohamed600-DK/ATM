@@ -1,0 +1,34 @@
+{'window_name': 'main window', 'title': 'main window', 'width': 1536, 'height': 864, 'shift_x': 0, 'shift_y': 0, 'gemotry_value': None, 'geometry_value': '1536x864+0+0'}
+
+{'parent': <tkinter.Tk object .>, 'name': 'masg', 'title': 'Massage', 'bg': 'red', 'fg': None, 'bd': None, 'height': 140, 'width': 250, 'font': None, 'x_location': 300, 'y_location': 300, 'gemotry_value': '250x140+643+362'}
+
+{'parent': <tkinter.Tk object .>, 'Frame_name': 'frame', 'bg': 'red', 'bd': 20, 'height': 864, 'width': 1536, 'padx': None, 'pady': None, 'relief': 'ridge', 'takefocus': 0, 'x_location': 0, 'y_location': 0}
+
+{'parent': <tkinter.Tk object .>, 'Frame_name': 'frame', 'bg': 'blue', 'bd': 20, 'height': 864, 'width': 1536, 'padx': None, 'pady': None, 'relief': 'ridge', 'takefocus': 0, 'x_location': 0, 'y_location': 0}
+
+{'parent': <tkinter.Tk object .>, 'Frame_name': 'frame', 'bg': 'orange', 'bd': 20, 'height': 864, 'width': 1536, 'padx': None, 'pady': None, 'relief': 'ridge', 'takefocus': 0, 'x_location': 0, 'y_location': 0}
+
+{'parent': <tkinter.Tk object .>, 'Frame_name': 'frame', 'bg': 'orange', 'bd': 20, 'height': 864, 'width': 1536, 'padx': None, 'pady': None, 'relief': 'ridge', 'takefocus': 0, 'x_location': 0, 'y_location': 0}
+
+{'parent': <tkinter.Tk object .>, 'Frame_name': 'frame', 'bg': 'orange', 'bd': 20, 'height': 864, 'width': 1536, 'padx': None, 'pady': None, 'relief': 'ridge', 'takefocus': 0, 'x_location': 0, 'y_location': 0}
+
+{'parent': <tkinter.Tk object .>, 'Frame_name': 'frame', 'bg': 'orange', 'bd': 20, 'height': 864, 'width': 1536, 'padx': None, 'pady': None, 'relief': 'ridge', 'takefocus': 0, 'x_location': 0, 'y_location': 0}
+
+{'parent': <tkinter.Toplevel object .!toplevel>, 'widges_name': 'Label', 'text': '\nyour account is blocked \nplease go to the branch\nor tray another account number\n                     ', 'relief': 'sunken', 'width': 'Auto_calculat', 'height': 'Auto_calculat', 'bg': 'blue', 'fg': None, 'bd': None, 'fon': None, 'x_location': 30, 'y_location': 30, 'justify': 'center'}
+
+{'parent': <tkinter.Frame object .!frame7>, 'widges_name': 'TextBox', 'relief': 'sunken', 'text_style': None, 'width': 19, 'text_bg': None, 'text_fg': None, 'bg': None, 'fg': None, 'bd': None, 'x_location': 632, 'y_location': 288, 'text_valu': <tkinter.StringVar object at 0x0000014C48D9FC40>, 'text_lenth': 10}
+
+{'parent': <tkinter.Frame object .!frame7>, 'widges_name': 'Button', 'text': 'ENTER', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942B9A0>, 'width': 10, 'height': 2, 'bg': None, 'fg': None, 'x_location': 698, 'y_location': 424}
+
+{'parent': <tkinter.Toplevel object .!toplevel>, 'widges_name': 'Button', 'text': 'close Program', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942BF40>, 'width': 10, 'height': 1, 'bg': None, 'fg': None, 'x_location': 80, 'y_location': 100}
+
+{'parent': <tkinter.Frame object .!frame8>, 'widges_name': 'Button', 'text': 'Cash Withdraw', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942BAC0>, 'width': 15, 'height': 2, 'bg': None, 'fg': None, 'x_location': 0, 'y_location': 108}
+
+{'parent': <tkinter.Frame object .!frame12>, 'widges_name': 'Button', 'text': 'Back', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942BEB0>, 'width': 15, 'height': 2, 'bg': None, 'fg': None, 'x_location': 648, 'y_location': 718, 'command': [<function switing_frame at 0x0000014C4942B010>, 'f_Fawry_Service', 'option_choise']}
+
+{'parent': <tkinter.Frame object .!frame8>, 'widges_name': 'Button', 'text': 'Balance Inquiry', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942BBE0>, 'width': 15, 'height': 2, 'bg': None, 'fg': None, 'x_location': 0, 'y_location': 424}
+
+{'parent': <tkinter.Frame object .!frame8>, 'widges_name': 'Button', 'text': 'Password Change', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942BD00>, 'width': 15, 'height': 2, 'bg': None, 'fg': None, 'x_location': 1216, 'y_location': 108}
+
+{'parent': <tkinter.Frame object .!frame8>, 'widges_name': 'Button', 'text': 'Balance Inquiry', 'call_function': <function GUI_app.button_call_fun.<locals>.call_fun at 0x0000014C4942BE20>, 'width': 15, 'height': 2, 'bg': None, 'fg': None, 'x_location': 1216, 'y_location': 424}
+

@@ -1,37 +1,33 @@
-strg="460x530"
-
-#function to store my string in list
-def string_list(string=str()):
-    #list of characters which must deleted form my string
-    remv_list=("'","["," ","{","\n","(",")")
-    #convert the string to list
-    conv_list=list()
-    str_val=str()
-    int_val=str()
-    #print("string ','count = ",string.count(","))
-    for count in string:
         
-        if(count in remv_list):
-            
-            continue
-        else:
-            print(count,"\n")
-            if(count ==','or count ==']' or count =='}' or count == "x" ):
-                
-                print(str_val,"\n")
-                if(str_val.isdigit()):
-                    
-                    conv_list.append(int(str_val))
-                else:
-                    conv_list.append(str_val)
-                str_val=""                
-            else:
-                str_val=str_val+count
-                continue
+        
+        
+    def updat_valuse(**arg):    
+        button_text(button_name,text)    
+        button_bg(button_name,bg)  
+        button_fg(button_name,fg)  
+        button_call_fun(button_name,call_function)  
+        button_size(button_name,width,heigh)  
+        button_pozition(button_name,x_location,y_location) 
+        
+def button_text(button_name,text=str()):
 
-    return conv_list       
+    print("button_text=%s%s"%button_name%text)
+
+def button_bg(button_name,color=str()):
+
+    print("button_text=%s%s"%button_name%text)
+def button_fg(button_name,color=str()):
+
+    print("button_text=%s%s"%button_name%text)
+def button_call_fun(button_name,*arg):
+
+    print("button_text=%s%s"%button_name%text)
 
 
 
+def button_size(button_name,width,height):
+    print("button_text=%s%s"%button_name%text)
 
-print(string_list(strg))
+
+def button_pozition(button_name,x_location=int(),y_location=int()):
+    print("button_text=%s%s"%button_name%text)
