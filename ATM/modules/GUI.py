@@ -1,15 +1,6 @@
-
-
-
-
-from doctest import master
 from tkinter import *
 
 from tkinter.font import Font
-
-
-
-
 
 #all uints are in pix unit
 
@@ -60,6 +51,7 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         "x_location":30,#its unit is Pix
         "y_location":30,#its unit is Pix
         "text_valu":"",
+        "text_lenth":10,
         "font":None
         }
     
@@ -396,8 +388,9 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         self.button_bg(button_name,bg)  
         self.button_fg(button_name,fg)  
         self.button_call_fun(button_name,call_function)  
-        self.button_size(button_name,width,heigh)  
-        self.button_pozition(button_name,x_location,y_location)  
+        self.button_size(button_name,width,heigh) 
+        if(x_location !=None and y_location != None): 
+            self.button_pozition(button_name,x_location,y_location)  
 
         return Button_obj
     
@@ -406,6 +399,7 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         Button_obj=self.widged_list[button_name]
         self.options[button_name]["text"]=text
         Button_obj.config(text=text)
+        self.button_size(button_name,"auto","auto")
 
     def button_bg(self,button_name,color=str()):
 
@@ -422,22 +416,26 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
     def button_call_fun(self,button_name,*arg):
         
         Button_obj=self.widged_list[button_name]
-        if(None not in  arg and len(arg)!=0):
-            if(arg[0]==[]):
-                def call_fun():
-                    Button_obj.config(command=None)
-                    print("No arguments")   
-            elif(len(arg)>0):
-                arg=list(*arg)  
-                fun=arg.pop(0)
-                def call_fun():
-                    fun(*arg)
-            
-            self.options[button_name]["call_function"]=call_fun
-            Button_obj.config(command=call_fun)
-        else:
-            Button_obj.config(command=[])
-
+        try:
+            if(None not in  arg and len(arg)!=0):
+                if(arg[0]==[]):
+                    def call_fun():
+                        Button_obj.config(command=None)
+                        print("No arguments")   
+                elif(len(arg)>0):
+                    arg=list(*arg)  
+                    fun=arg.pop(0)
+                    def call_fun():
+                        fun(*arg)
+                
+                self.options[button_name]["call_function"]=call_fun
+                Button_obj.config(command=call_fun)
+            else:
+                Button_obj.config(command=[])
+        except: 
+                fun=list(arg).pop(0) 
+                self.options[button_name]["call_function"]=fun
+                Button_obj.config(command=fun)
 
 
     def button_size(self,button_name,width,height):
@@ -491,7 +489,7 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
                     x_location=None,
                     y_location=None,
                     check_text_lenth=False ,  
-                    text_lenth=10                   
+                    text_lenth=None                   
                      ):
 
         entry_options=self.entry_options.copy()
@@ -520,7 +518,10 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         else:entry_options["y_location"]=y_location
         if (font==None):font=self.font_init(font_size=24)
         else:entry_options["y_location"]=y_location
-
+        
+        if(text_lenth==None):text_lenth=entry_options["text_lenth"]
+        else:entry_options["text_lenth"]=text_lenth
+        
         textbox_obj=Entry(parent,font=font)
         entry_options["text_valu"] =StringVar()
 
@@ -536,7 +537,8 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         self.textbox_bg(textbox_name,bg)
         self.textbox_fg(textbox_name,fg)
         self.textbox_boardwidth(textbox_name,bd)
-        self.textbox_pozition(textbox_name,x_location,y_location)
+        if(x_location !=None and y_location != None):
+            self.textbox_pozition(textbox_name,x_location,y_location)
 
 
 
@@ -697,7 +699,9 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         self.label_bg(Label_name,bg)
         self.label_fg(Label_name,fg)
         self.label_boardwidth(Label_name,bd)
-        self.label_pozition(Label_name,x_location,y_location)
+        
+        if(x_location !=None and y_location != None):
+            self.label_pozition(Label_name,x_location,y_location)
 
         
 
@@ -833,7 +837,8 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         self.frame_boardwidth(Frame_name,bd)
         self.frame_padx(Frame_name,padx)
         self.frame_pady(Frame_name,pady)
-        self.frame_pozition(Frame_name,x_location,x_location)
+        if(x_location !=None and y_location != None):
+            self.frame_pozition(Frame_name,x_location,x_location)
         
         return frame_obj
 
@@ -970,13 +975,13 @@ class masg(GUI_app):
 ##################################################################################################################
 ##################################################################################################################
 ##################################################################################################################
-
+"""
 main_window=GUI_app()
 
 screan_x,screan_y,base_window=main_window.creat_window(window_name="main_window")
 t=masg(name="m",parent_class=main_window,masg="hellow",x_location=screan_x/2,y_location=screan_y/2,parent_obj=base_window)
 
-""" 
+ 
  
 
 def switing_frame(disable_frame,enable_frame):
@@ -1071,8 +1076,8 @@ cash_withdraw_button()
 cash_withdraw_label()
 print(main_window.options["cash_withdraw_button"]["height"])
 print(main_window.options["cash_withdraw_button"]["width"])
-"""
+
 
 ####################################################################################################################################################################
 main_window.run_app()
- 
+ """

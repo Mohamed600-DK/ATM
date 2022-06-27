@@ -1,10 +1,10 @@
 
-import sys
 
-from numpy import size
+
+
 
 ####################################################################################################################################################################
-from  GUI import * 
+from  modul.GUI import * 
 import json
 ####################################################################################################################################################################
 clints_data=list()
@@ -13,87 +13,6 @@ clint=dict()
 data=dict()
 check_pass=0
 ####################################################################################################################################################################
-class masg(GUI_app):
-    font_text=GUI_app().font_init(size=10)
-    root_window=""
-
-    masg_option=dict(
-        name="masg",
-        parent=root_window,
-        masg="masg",
-        title="Massage",
-        bg="red",
-        fg=None,
-        bd=None,
-        height=150,
-        width=260, 
-        font=None,
-        x_location=None,
-        y_location=None
-    )
-
-    def __init__(self,
-                name,
-                parent=None,
-                masg=None,
-                title=None,
-                bg=None,
-                fg=None,
-                bd=None,
-                height=None,
-                width=None, 
-                font=None,
-                x_location=None,
-                y_location=None):
-
-        self.root_window=self.masg_window()
-        self.masg_label()
-        self.masg_button()
-        GUI_app().top_level_options["parent"]=parent
-        GUI_app().top_level_options["name"]=masg
-        GUI_app().top_level_options["title"]=title
-        GUI_app().top_level_options["bg"]=bg
-        GUI_app().top_level_options["fg"]=fg
-        GUI_app().top_level_options["bd"]=bd
-        GUI_app().top_level_options["height"]=height
-        GUI_app().top_level_options["width"]=width
-        GUI_app().top_level_options["font"]=font
-        GUI_app().top_level_options["x_location"]=x_location
-        GUI_app().top_level_options["y_location"]=y_location
-
-
-
-    def masg_window(self):
-
-
-        root_window=GUI_app().creat_toplevelwindow("masg",title="Massage",width=260, height=150,x_location=300,y_location=300,bg="red")
-        GUI_app().disable_window("masg")
-        
-    
-    def masg_label(self):
-        global font_text
-        GUI_app().label_options["parent"]=self.root_window
-        GUI_app().label_options["x_location"]=12
-        GUI_app().label_options["y_location"]=5
-        GUI_app().label_options["width"]=26
-        GUI_app().label_options["height"]=5
-        GUI_app().label_options["justify"]=CENTER
-        obj_label=GUI_app().creat_label("login_masg_label",font_text=self.font_text,bg="blue")
-        obj_label.pack(side="TOP") 
-    def masg_button(self):
-        
-        GUI_app().Button_options["parent"]=self.root_window
-        GUI_app().Button_options["text"]="ok"
-        GUI_app().Button_options["call_function"]=[GUI_app().disable_window,"login_masg"]
-        GUI_app().Button_options["width"]="auto"
-        GUI_app().Button_options["height"]=1
-        GUI_app().Button_options["x_location"]=100
-        GUI_app().Button_options["y_location"]=110
-        obj_button=GUI_app().creat_button(button_name="login_masg_button",font=self.font_text)
-        obj_button.pack(side="BOTTOM")    
-
-
-
 ####################################################################################################################################################################
 def load_clints_data():  
     global clints_data,data,locked_accounts
@@ -154,16 +73,11 @@ def check_password():
             main_window.button_text("login_button","close Program")
 
         else:           
-            text_msg=(
-                '''
-    you have only %s trials
-enter your account's password agine
-                '''
-    %str(3-check_pass)).capitalize()  
+            text_msg=("you have only %s trials"%str(3-check_pass)+"\n"+
+                      "enter your account's password"+"\n"+" agine").capitalize()  
 
             main_window.label_text("login_masg_label",text_msg)
             main_window.enable_window("login_masg",True)
-            main_window.enable_widget("login_masg_label")
             check_pass +=1
 ####################################################################################################################################################################
 def log_in():
@@ -183,6 +97,57 @@ def log_in():
                  
             main_window.label_text("login_label","Enter your account's password:")
             main_window.button_call_fun("login_button",[check_password])
+def withdraw():
+
+    max_multiply_valu=100
+    max_withdraw_valu=5000
+    account_balanc=clint["Balance"]
+    amout_withdraw=int(main_window.get_text("cash_withdraw_textbox"))
+
+    if(amout_withdraw<=account_balanc):#condition #1
+        print("pass1")
+        if ((amout_withdraw%max_multiply_valu)==0):#condition #2
+            print("pass2")
+            if(amout_withdraw<=max_withdraw_valu):#condition #3
+                ATM_Actuator_Out()
+                text_msg=("Thank you,\nyou will get your Money now\n please be patient").capitalize()  
+                main_window.label_text("login_masg_label",text_msg)
+                main_window.enable_window("login_masg",True)
+                def event():
+                    switing_frame("cash_withdraw_frame","home_frame")
+                    main_window.disable_window("login_masg")
+                    main_window.button_call_fun("login_masg_button",[main_window.disable_window,"login_masg"])
+        
+                main_window.button_call_fun("login_masg_button",[event])
+                main_window.button_text("login_masg_button","Ok")
+                
+            else:#condition #3
+                text_msg=("it isn't allawed to withdraw more than %s"%max_withdraw_valu+"\n"
+                +"please enter the"+"\n"+" amount to withdraw again").capitalize()  
+                main_window.label_text("login_masg_label",text_msg)
+                main_window.enable_window("login_masg",True)
+                main_window.button_text("login_masg_button","ok")
+        else:#condition #2
+            text_msg=("it is allawed only to"+"\n"+"withdraw %s or it's muliple"%max_multiply_valu+"\n"
+            +"please enter "+"\n"+" the amount to withdraw again").capitalize()  
+            main_window.label_text("login_masg_label",text_msg)
+            main_window.enable_window("login_masg",True)
+            main_window.button_text("login_masg_button","Ok")
+    else:#condition #1   
+
+        text_msg=("there is no sufficient balance"+"\n"
+                +"please check "+"\n"+"your account balance").capitalize()  
+        main_window.label_text("login_masg_label",text_msg)
+        main_window.enable_window("login_masg",True)
+        def event():
+            switing_frame("cash_withdraw_frame","home_frame")
+            main_window.disable_window("login_masg")
+            main_window.button_call_fun("login_masg_button",[main_window.disable_window,"login_masg"])
+        
+        main_window.button_call_fun("login_masg_button",[event])
+        main_window.button_text("login_masg_button","return to home window")
+        
+
 ####################################################################################################################################################################
 def switing_frame(disable_frame,enable_frame):
     main_window.disable_widget(disable_frame)
@@ -199,8 +164,14 @@ def base_window():
 def login_masg_window():
 
         
-        main_window.creat_toplevelwindow("login_masg",title="Massage",width=260,height=150,x_location=300,y_location=300,bg="red")
+        root=main_window.creat_toplevelwindow("login_masg",title="Massage",width=250,height=150,x_location=300,y_location=300,bg="red")
         main_window.options["login_masg"]["parent"]= main_window.window_list["base_window"]
+        #root.grid_columnconfigure(0,weight=1)
+        root.grid_columnconfigure(1,weight=1)
+        root.grid_rowconfigure(0,weight=1)
+        root.grid_rowconfigure(1,weight=1)
+        root.grid_rowconfigure(2,weight=1)
+
         main_window.disable_window("login_masg") 
 
 
@@ -210,48 +181,6 @@ def login_masg_window():
 ####################################################################################################################################################################
    
 
-def withdraw():
-
-    max_multiply_valu=100
-    max_withdraw_valu=5000
-    account_balanc=clint["Balance"]
-    amout_withdraw=int(main_window.get_text("cash_withdraw_textbox"))
-    print(amout_withdraw)
-    print(account_balanc)
-    if(amout_withdraw<=account_balanc):#condition #1
-        print("pass1")
-        if ((amout_withdraw%max_multiply_valu)==0):#condition #2
-            print("pass2")
-            if(amout_withdraw<=max_withdraw_valu):#condition #3
-                print("pass3")
-                ATM_Actuator_Out()
-            else:#condition #3
-                text_msg=("it isn't allawed to withdraw more than %s"%max_withdraw_valu+"\n"
-                +"please enter the amount to withdraw again").capitalize()  
-                main_window.label_text("login_masg_label",text_msg)
-                main_window.enable_window("login_masg",True)
-                main_window.button_text("login_masg_button","ok")
-        else:#condition #2
-            text_msg=("it is allawed only to withdraw %s or it's muliple"%max_multiply_valu+"\n"
-            +"please enter the amount to withdraw again").capitalize()  
-            main_window.label_text("login_masg_label",text_msg)
-            main_window.enable_window("login_masg",True)
-            #main_window.button_call_fun("login_masg_button",[withdraw])
-            main_window.button_text("login_masg_button","Ok")
-    else:#condition #1   
-
-        text_msg=("there is no sufficient balance"+"\n"
-                +"please check your account balance").capitalize()  
-        main_window.label_text("login_masg_label",text_msg)
-        main_window.enable_window("login_masg",True)
-        def event():
-            switing_frame("cash_withdraw_frame","home_frame")
-            main_window.disable_window("login_masg")
-            main_window.button_call_fun("login_masg_button",[main_window.disable_window,"login_masg"])
-        
-        main_window.button_call_fun("login_masg_button",[event])
-        main_window.button_text("login_masg_button","return to home window")
-        
 
    
 load_clints_data()
@@ -328,7 +257,8 @@ def login_masg_label():
     main_window.label_options["width"]=26
     main_window.label_options["height"]=5
     main_window.label_options["justify"]=CENTER
-    main_window.creat_label("login_masg_label",font_text=font_text,bg="blue")
+    label_obj=main_window.creat_label("login_masg_label",font_text=font_text,bg="blue")
+    label_obj.grid(row=1,column=1)
 ####################################################################################################################################################################
 def login_label():
 
@@ -336,7 +266,7 @@ def login_label():
     main_window.label_options["text"]="Enter Your Account Name:"
     main_window.label_options["width"]="auto"
     main_window.label_options["height"]="auto"
-    main_window.label_options["x_location"]=230
+    main_window.label_options["x_location"]=main_window.options["accountNumber_textbox"]["x_location"]-420
     main_window.label_options["y_location"]=main_window.options["accountNumber_textbox"]["y_location"]
     main_window.creat_label("login_label")
 
@@ -349,8 +279,8 @@ def login_masg_button():
     main_window.Button_options["height"]=1
     main_window.Button_options["x_location"]=100
     main_window.Button_options["y_location"]=110
-    main_window.creat_button(button_name="login_masg_button",font=font_text)
-
+    button_obj=main_window.creat_button(button_name="login_masg_button",font=font_text)
+    button_obj.grid(row=2,column=1)
 ####################################################################################################################################################################
 def login_button():
 
@@ -442,7 +372,7 @@ def b_Fawry_Service():
     button_x_location=screan_x-button_width_px
     button_y_location=(screan_y/2)-(button_height_px/2)    
     main_window.Button_options["parent"]=main_window.widged_list["home_frame"]
-    main_window.Button_options["text"]="Balance Inquiry"
+    main_window.Button_options["text"]="Fawry Service"
     main_window.Button_options["call_function"]=[switing_frame,"home_frame","fawry_service_frame"]
     main_window.Button_options["width"]=button_width
     main_window.Button_options["height"]=button_height
@@ -538,7 +468,7 @@ def cash_withdraw_label():
     main_window.label_options["text"]="desired amount to withdraw:"
     main_window.label_options["width"]="auto"
     main_window.label_options["height"]="auto"
-    main_window.label_options["x_location"]=230
+    main_window.label_options["x_location"]=main_window.options["cash_withdraw_textbox"]["x_location"]-400
     main_window.label_options["y_location"]=main_window.options["cash_withdraw_textbox"]["y_location"]
     main_window.creat_label("cash_withdraw_label")
 ####################################################################################################################################################################
