@@ -2,13 +2,13 @@
   "clints_data": [
     {
       "ID": "123",
-      "name": "mohamed",
+      "name":"mohamed",
       "password": "123",
       "Balance": 1000
     },
     {
       "ID": "456",
-      "name": "Omar",
+      "name":"Omar",
       "password": "456",
       "Balance": 5000
     }
