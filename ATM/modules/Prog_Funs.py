@@ -25,31 +25,37 @@ def save_clints_data():
 ####################################################################################################################################################################
 def find_clint(acc_num):
       
-    
-    for clint_count in gv.locked_accounts:
-        if acc_num == clint_count["ID"]:
-            #repalce in with top_level window
-            text_msg=("your account is blocked"+"\n"+"please go to the branch"+
-            "\n"+"or tray another Account number").capitalize()  
-            gv.main_window.label_text("login_masg_label",text_msg)
-            gv.main_window.enable_window("login_masg",True)
-            gv.main_window.button_call_fun("login_masg_button",gv.main_window.exit_app)
-            gv.main_window.button_text("login_masg_button","close Program")
+    if(len(acc_num)==gv.account_number_len):
+        for clint_count in gv.locked_accounts:
+            if acc_num == clint_count["ID"]:
+                #repalce in with top_level window
+                text_msg=("your account is blocked"+"\n"+"please go to the branch"+
+                "\n"+"or tray another Account number").capitalize()  
+                gv.main_window.label_text("login_masg_label",text_msg)
+                gv.main_window.enable_window("login_masg",True)
+                gv.main_window.button_call_fun("login_masg_button",gv.main_window.exit_app)
+                gv.main_window.button_text("login_masg_button","close Program")
 
-            return "Bocked"    
+                return "Bocked"    
 
-    for clint_count in gv.clints_data:
-        if acc_num == clint_count["ID"]:
-            return clint_count
-    masg=("your account number" +"\n"+"isn't exist,please\n check your account number").capitalize()
-    gv.main_window.label_text("login_masg_label",masg)
-    gv.main_window.enable_window("login_masg",True)
-    return "Not_fond"
+        for clint_count in gv.clints_data:
+            if acc_num == clint_count["ID"]:
+                return clint_count
+        masg=("your account number" +"\n"+"isn't exist,please\n check your account number").capitalize()
+        gv.main_window.label_text("login_masg_label",masg)
+        gv.main_window.enable_window("login_masg",True)
+        return "Not_fond"
+    else:
+        masg=("your account number" +"\n"+"must consist of "+ str(gv.account_number_len)+
+        " nmubers,\nplease check your account number").capitalize()
+
+        gv.main_window.label_text("login_masg_label",masg)
+        gv.main_window.enable_window("login_masg",True)    
 ##################################################################################################################################################################
 def check_password():
    
     
-    password=gv.main_window.get_text("accountNumber_textbox")
+    password=gv.main_window.get_text("accountPassword_textbox")
     if (password !=""):
         if (password==gv.clint["password"]):
             switing_frame("log_in_frame","home_frame")
@@ -87,7 +93,9 @@ def log_in():
            pass
             
         elif(type(gv.clint)==type(dict())):
- 
+            
+            gv.main_window.disable_widget("accountNumber_textbox")
+            gv.main_window.enable_widget("accountPassword_textbox")
             gv.main_window.label_text("login_label","Enter your account's password:")
             gv.main_window.button_call_fun("login_button",check_password)
     

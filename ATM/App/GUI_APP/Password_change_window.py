@@ -1,7 +1,8 @@
 from modules.GUI import *
 import modules.Global_variable as gv
-from modules.private_functions import back, switing_frame,title
+from modules.private_functions import back,title
 from modules.Prog_Funs import change_password
+from App.GUI_APP.windows_colors import * 
 #####################################################################################################################
 #####################################################################################################################
 #####################################################################################################################
@@ -14,7 +15,8 @@ def password_change_frame():
     gv.main_window.frame_options["height"]=gv.main_window.options["base_window"]["height"]
     gv.main_window.frame_options["relief"]=RIDGE
     gv.main_window.frame_options["bd"]=20
-    gv.main_window.creat_frame("password_change_frame",bg="orange")
+    gv.main_window.frame_options["bg"]=password_change_bg_color
+    gv.main_window.creat_frame("password_change_frame")
     title("password_change_frame","Change Password")
     back("password_change_frame","home_frame")
     gv.main_window.disable_widget("password_change_frame")

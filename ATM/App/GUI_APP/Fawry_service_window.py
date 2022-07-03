@@ -2,7 +2,7 @@ from modules.private_functions import back, switing_frame,title
 from modules.GUI import *
 import modules.Global_variable as gv
 from modules.Prog_Funs import fawry_service
-
+from App.GUI_APP.windows_colors import * 
 
 
 
@@ -14,7 +14,8 @@ def Fawry_Service_frame():
     gv.main_window.frame_options["height"]=gv.main_window.options["base_window"]["height"]
     gv.main_window.frame_options["relief"]=RIDGE
     gv.main_window.frame_options["bd"]=20
-    gv.main_window.creat_frame("fawry_service_frame",bg="orange")
+    gv.main_window.frame_options["bg"]=fawry_service_bg_color
+    gv.main_window.creat_frame("fawry_service_frame")
     back("fawry_service_frame","home_frame")
     title("fawry_service_frame","fawry service")
     __creat_fawry_recharge_frame()
@@ -107,20 +108,24 @@ def __button_event_orange():
     gv.reghatfe_network="Orange"
     gv.main_window.label_text("title",str(gv.reghatfe_network)+" Recharge")
     switing_frame("fawry_service_frame","fawry_recharge_frame")
+    gv.main_window.frame_bg("fawry_recharge_frame","orange")
  
 
 def __button_event_vodafone():
     gv.reghatfe_network="Vodafone"
     gv.main_window.label_text("title",str(gv.reghatfe_network)+" Recharge")
-    switing_frame("fawry_service_frame","fawry_recharge_frame") 
+    switing_frame("fawry_service_frame","fawry_recharge_frame")
+    gv.main_window.frame_bg("fawry_recharge_frame","red") 
 def __button_event_etisalat():
     gv.reghatfe_network="Etisalat"
     gv.main_window.label_text("title",str(gv.reghatfe_network)+" Recharge")
     switing_frame("fawry_service_frame","fawry_recharge_frame")       
+    gv.main_window.frame_bg("fawry_recharge_frame","green")
 def __button_event_we():
     gv.reghatfe_network="We"
     gv.main_window.label_text("title",str(gv.reghatfe_network)+" Recharge")
     switing_frame("fawry_service_frame","fawry_recharge_frame")
+    gv.main_window.frame_bg("fawry_recharge_frame","purple")
 ##########################################################################################################################
 ##########################################################################################################################
 ##########################################################################################################################
