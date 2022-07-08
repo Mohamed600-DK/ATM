@@ -2,7 +2,7 @@
 from modules.GUI import RIDGE
 import modules.Global_variable as gv
 from modules.private_functions import back,title
-
+from App.GUI_APP.windows_colors import * 
 
 def Balance_Inquiry_frame():
     gv.main_window.frame_options["parent"]= gv.main_window.window_list["base_window"]
@@ -12,7 +12,8 @@ def Balance_Inquiry_frame():
     gv.main_window.frame_options["height"]=gv.main_window.options["base_window"]["height"]
     gv.main_window.frame_options["relief"]=RIDGE
     gv.main_window.frame_options["bd"]=20
-    gv.main_window.creat_frame("balance_inquiry_frame",bg="orange") 
+    gv.main_window.frame_options["bg"]=balance_inquir_bg_color
+    gv.main_window.creat_frame("balance_inquiry_frame") 
     title("balance_inquiry_frame","Balance Inquiry")
     back("balance_inquiry_frame","home_frame")
     gv.main_window.button_text("back","Ok")

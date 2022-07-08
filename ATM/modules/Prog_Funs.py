@@ -25,31 +25,37 @@ def save_clints_data():
 ####################################################################################################################################################################
 def find_clint(acc_num):
       
-    
-    for clint_count in gv.locked_accounts:
-        if acc_num == clint_count["ID"]:
-            #repalce in with top_level window
-            text_msg=("your account is blocked"+"\n"+"please go to the branch"+
-            "\n"+"or tray another Account number").capitalize()  
-            gv.main_window.label_text("login_masg_label",text_msg)
-            gv.main_window.enable_window("login_masg",True)
-            gv.main_window.button_call_fun("login_masg_button",gv.main_window.exit_app)
-            gv.main_window.button_text("login_masg_button","close Program")
+    if(len(acc_num)==gv.account_number_len):
+        for clint_count in gv.locked_accounts:
+            if acc_num == clint_count["ID"]:
+                #repalce in with top_level window
+                text_msg=("your account is blocked"+"\n"+"please go to the branch"+
+                "\n"+"or tray another Account number").capitalize()  
+                gv.main_window.label_text("login_masg_label",text_msg)
+                gv.main_window.enable_window("login_masg",True)
+                gv.main_window.button_call_fun("login_masg_button",gv.main_window.exit_app)
+                gv.main_window.button_text("login_masg_button","close Program")
 
-            return "Bocked"    
+                return "Bocked"    
 
-    for clint_count in gv.clints_data:
-        if acc_num == clint_count["ID"]:
-            return clint_count
-    masg=("your account number" +"\n"+"isn't exist,please\n check your account number").capitalize()
-    gv.main_window.label_text("login_masg_label",masg)
-    gv.main_window.enable_window("login_masg",True)
-    return "Not_fond"
+        for clint_count in gv.clints_data:
+            if acc_num == clint_count["ID"]:
+                return clint_count
+        masg=("your account number" +"\n"+"isn't exist,please\n check your account number").capitalize()
+        gv.main_window.label_text("login_masg_label",masg)
+        gv.main_window.enable_window("login_masg",True)
+        return "Not_fond"
+    else:
+        masg=("your account number" +"\n"+"must consist of "+ str(gv.account_number_len)+
+        " nmubers,\nplease check your account number").capitalize()
+
+        gv.main_window.label_text("login_masg_label",masg)
+        gv.main_window.enable_window("login_masg",True)    
 ##################################################################################################################################################################
 def check_password():
    
     
-    password=gv.main_window.get_text("accountNumber_textbox")
+    password=gv.main_window.get_text("accountPassword_textbox")
     if (password !=""):
         if (password==gv.clint["password"]):
             switing_frame("log_in_frame","home_frame")
@@ -87,7 +93,9 @@ def log_in():
            pass
             
         elif(type(gv.clint)==type(dict())):
- 
+            
+            gv.main_window.disable_widget("accountNumber_textbox")
+            gv.main_window.enable_widget("accountPassword_textbox")
             gv.main_window.label_text("login_label","Enter your account's password:")
             gv.main_window.button_call_fun("login_button",check_password)
     
@@ -196,5 +204,38 @@ def fawry_service_call(clint_phone_number=None):
     print("the operation is done")      
     print(clint_phone_number)
     print("Network is ",gv.reghatfe_network) 
-    
-    
+####################################################################################################################################################################
+def change_password():
+    new_pass=gv.main_window.get_text("password_change_textbox")
+    comfer_new_pass=gv.main_window.get_text("comfirm_password_change_textbox")
+    pass_lenth=gv.main_window.options["password_change_textbox"]["text_lenth"]
+    def __change_password_true_condition():
+        #switing_frame("fawry_recharge_frame","fawry_service_frame")
+        switing_frame("password_change_frame","home_frame")
+        gv.main_window.disable_window("login_masg")
+        gv.main_window.button_call_fun("login_masg_button",[gv.main_window.disable_window,"login_masg"])
+   
+   
+    if(new_pass !="" or comfer_new_pass !="" ):
+        if(len(new_pass)==pass_lenth):
+            if(new_pass==comfer_new_pass ):
+                gv.clint["password"] =new_pass
+                #print(message)
+                text_msg=("your password is changed successfully").capitalize()  
+                gv.main_window.label_text("login_masg_label",text_msg)
+                gv.main_window.enable_window("login_masg",True)
+                gv.main_window.button_call_fun("login_masg_button",__change_password_true_condition)
+                gv.main_window.button_text("login_masg_button","Ok")     
+
+            else:
+                #print(message)    
+                text_msg=("your password isn't matched\nplease try agine").capitalize()  
+                gv.main_window.label_text("login_masg_label",text_msg)
+                gv.main_window.enable_window("login_masg",True)
+                gv.main_window.button_text("login_masg_button","Ok")     
+        else:
+            #print(message)    
+            text_msg=("your password must\nconsist of '4' numbers").capitalize()  
+            gv.main_window.label_text("login_masg_label",text_msg)
+            gv.main_window.enable_window("login_masg",True)
+            gv.main_window.button_text("login_masg_button","Ok")     

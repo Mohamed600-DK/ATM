@@ -2,6 +2,7 @@
 import modules.Global_variable as gv
 from modules.private_functions import *
 from modules.GUI import RIDGE
+from App.GUI_APP.windows_colors import * 
 
 def home_frame():
     gv.main_window.frame_options["parent"]= gv.main_window.window_list["base_window"]
@@ -11,7 +12,8 @@ def home_frame():
     gv.main_window.frame_options["height"]=gv.main_window.options["base_window"]["height"]
     gv.main_window.frame_options["relief"]=RIDGE
     gv.main_window.frame_options["bd"]=20
-    gv.main_window.creat_frame("home_frame",bg="blue")
+    gv.main_window.frame_options["bg"]=home_bg_color
+    gv.main_window.creat_frame("home_frame")
     title("home_frame","Home")
     
     gv.main_window.disable_widget("home_frame")

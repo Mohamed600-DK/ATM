@@ -52,6 +52,7 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         "y_location":30,#its unit is Pix
         "text_valu":"",
         "text_lenth":10,
+        "text_type":"numbers_only",
         "font":None
         }
     
@@ -489,7 +490,8 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
                     x_location=None,
                     y_location=None,
                     check_text_lenth=False ,  
-                    text_lenth=None                   
+                    text_lenth=None,
+                    text_type=None  #string_only,both,numbers_only                 
                      ):
 
         entry_options=self.entry_options.copy()
@@ -522,6 +524,9 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         if(text_lenth==None):text_lenth=entry_options["text_lenth"]
         else:entry_options["text_lenth"]=text_lenth
         
+        if(text_type==None):text_type=entry_options["text_type"]
+        else:entry_options["text_type"]=text_type
+        
         textbox_obj=Entry(parent,font=font)
         entry_options["text_valu"] =StringVar()
 
@@ -529,7 +534,7 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
         self.widged_list[textbox_name]=textbox_obj
         if(check_text_lenth==True):
             call_check_fun=parent.register(self.textbox_check_text)
-            textbox_obj.config(validate="key",validatecommand=(call_check_fun,text_lenth,"%P"))
+            textbox_obj.config(validate="key",validatecommand=(call_check_fun,text_lenth,"%P",text_type))
         
         self.textbox_relier(textbox_name,relief)
         self.text_style(textbox_name,text_style)
@@ -544,18 +549,34 @@ class GUI_app(Tk,Button,Entry,Label,Font,Frame,Toplevel):
 
         return textbox_obj
 
-    def textbox_check_text(self,text_lenth,text):
+    def textbox_check_text(self,text_lenth,text,text_type):
         #check if the entered text out of the range of the entry width
         #check if the entered number is digit or it is string
         text_lenth=int(text_lenth)
+        text_type=text_type.lower()
+        print
         if(len(text)==0 ):
             return True
             
-        elif(len(text)<=text_lenth and text.isdigit()==True): 
-            return True
         else:
-            return False
-    
+            if (text_type=="numbers_only"): 
+                if(len(text)<=text_lenth and text.isdigit()==True):
+                    return True
+                else:
+                    return False
+                
+            elif(text_type=="string_only"):
+                if(len(text)<=text_lenth and text.isalpha()==True):
+                    return True
+                else:
+                    return False
+                
+            elif(text_type=="both"):
+                if(len(text)<=text_lenth):
+                    return True
+                else:
+                    return False
+                
     def textbox_relier(self,textbox_name,relief):
 
         textbox_obj=self.widged_list[textbox_name]

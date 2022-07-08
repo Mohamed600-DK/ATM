@@ -5,5 +5,6 @@ def initialize_login_window():
     
     log_in_frame()
     accountNumber_textbox()
+    accountPassword_textbox()
     login_label()
     login_button()

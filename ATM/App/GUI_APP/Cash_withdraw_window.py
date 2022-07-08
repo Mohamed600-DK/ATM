@@ -2,6 +2,8 @@ from modules.GUI import *
 import modules.Global_variable as gv
 from modules.Prog_Funs import withdraw
 from modules.private_functions import back,title
+from App.GUI_APP.windows_colors import * 
+
 def Cash_Withdraw_frame():
     gv.main_window.frame_options["parent"]= gv.main_window.window_list["base_window"]
     gv.main_window.frame_options["x_location"]=0
@@ -10,7 +12,8 @@ def Cash_Withdraw_frame():
     gv.main_window.frame_options["height"]=gv.main_window.options["base_window"]["height"]
     gv.main_window.frame_options["relief"]=RIDGE
     gv.main_window.frame_options["bd"]=20
-    gv.main_window.creat_frame("cash_withdraw_frame",bg="orange")
+    gv.main_window.frame_options["bg"]=cash_withdraw_bg_color
+    gv.main_window.creat_frame("cash_withdraw_frame")
     back("cash_withdraw_frame","home_frame")
     title("cash_withdraw_frame","Cash Withdraw")
 
